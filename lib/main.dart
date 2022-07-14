@@ -28,6 +28,7 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+/////////////////////// EMPIEZA
 enum SelectTapaPiston { none, tapa, piston }
 
 enum SelectSistema { none, SI, STI }
@@ -38,6 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
       ElevatedButton.styleFrom(textStyle: const TextStyle(fontSize: 20));
   final ButtonStyle styleClean = ElevatedButton.styleFrom(
       primary: Colors.amberAccent, textStyle: const TextStyle(fontSize: 20));
+
+  //VARIABLES DE LA CALCULADORA GAP
 
   SelectSistema? sistema = SelectSistema.none;
   SelectTapaPiston? selectTapaPiston = SelectTapaPiston.none;
@@ -61,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   double Smin = 0; // mínima de Wear Ring
 
-  //CONTROLADORES
+  //CONTROLADORES DE LAS CAJAS DE TEXTO
   late TextEditingController _d1min;
   late TextEditingController _D2max;
   late TextEditingController _D3max;
@@ -76,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   late TextEditingController _Smin;
 
+//TIEMPO DE VIDA DEL APLICATIVO
   @override
   void initState() {
     //MANEJO DE ESTADO :  AL INICIO
@@ -110,85 +114,86 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
+//MAQUETEO DE LA VISTA - INTERFACE
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                padding: const EdgeInsets.all(8),
-                width: 300,
-                decoration: BoxDecoration(border: Border.all()),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text('¿Desea calcular el GAP de la Tapa o Piston?'),
-                    ListTile(
-                        title: const Text('Tapa'),
-                        leading: Radio<SelectTapaPiston>(
-                            value: SelectTapaPiston.tapa,
-                            groupValue: selectTapaPiston,
-                            onChanged: (SelectTapaPiston? value) {
-                              setState(() {
-                                selectTapaPiston = value;
-                              });
-                            })),
-                    ListTile(
-                        title: const Text('Piston'),
-                        leading: Radio<SelectTapaPiston>(
-                            value: SelectTapaPiston.piston,
-                            groupValue: selectTapaPiston,
-                            onChanged: (SelectTapaPiston? value) {
-                              setState(() {
-                                selectTapaPiston = value;
-                              });
-                            }))
-                  ],
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  padding: const EdgeInsets.all(8),
+                  width: 300,
+                  decoration: BoxDecoration(border: Border.all()),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text('¿Desea calcular el GAP de la Tapa o Piston?'),
+                      ListTile(
+                          title: const Text('Tapa'),
+                          leading: Radio<SelectTapaPiston>(
+                              value: SelectTapaPiston.tapa,
+                              groupValue: selectTapaPiston,
+                              onChanged: (SelectTapaPiston? value) {
+                                setState(() {
+                                  selectTapaPiston = value;
+                                });
+                              })),
+                      ListTile(
+                          title: const Text('Piston'),
+                          leading: Radio<SelectTapaPiston>(
+                              value: SelectTapaPiston.piston,
+                              groupValue: selectTapaPiston,
+                              onChanged: (SelectTapaPiston? value) {
+                                setState(() {
+                                  selectTapaPiston = value;
+                                });
+                              }))
+                    ],
+                  ),
                 ),
-              ),
-              Container(
-                width: 300,
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(border: Border.all()),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                        '¿Sistema Internacional (SI) o Sistema Técnico Inglés (STI)?'),
-                    ListTile(
-                        title: const Text('Sistema Internacional (SI)'),
-                        leading: Radio<SelectSistema>(
-                            value: SelectSistema.SI,
-                            groupValue: sistema,
-                            onChanged: (SelectSistema? value) {
-                              setState(() {
-                                sistema = value;
-                              });
-                            })),
-                    ListTile(
-                        title: const Text('Sistema Técnico Inglés (STI)'),
-                        leading: Radio<SelectSistema>(
-                            value: SelectSistema.STI,
-                            groupValue: sistema,
-                            onChanged: (SelectSistema? value) {
-                              setState(() {
-                                sistema = value;
-                              });
-                            }))
-                  ],
+                Container(
+                  width: 300,
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(border: Border.all()),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const Text(
+                          '¿Sistema Internacional (SI) o Sistema Técnico Inglés (STI)?'),
+                      ListTile(
+                          title: const Text('Sistema Internacional (SI)'),
+                          leading: Radio<SelectSistema>(
+                              value: SelectSistema.SI,
+                              groupValue: sistema,
+                              onChanged: (SelectSistema? value) {
+                                setState(() {
+                                  sistema = value;
+                                });
+                              })),
+                      ListTile(
+                          title: const Text('Sistema Técnico Inglés (STI)'),
+                          leading: Radio<SelectSistema>(
+                              value: SelectSistema.STI,
+                              groupValue: sistema,
+                              onChanged: (SelectSistema? value) {
+                                setState(() {
+                                  sistema = value;
+                                });
+                              }))
+                    ],
+                  ),
                 ),
-              ),
-              selectTapaPiston == SelectTapaPiston.tapa
-                  ? Container(
-                      width: 300,
-                      decoration: BoxDecoration(border: Border.all()),
-                      child: Expanded(
+                selectTapaPiston == SelectTapaPiston.tapa
+                    ? Container(
+                        width: 300,
+                        decoration: BoxDecoration(border: Border.all()),
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -239,13 +244,11 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           ],
                         ),
-                      ),
-                    )
-                  : selectTapaPiston == SelectTapaPiston.piston
-                      ? Container(
-                          width: 300,
-                          decoration: BoxDecoration(border: Border.all()),
-                          child: Expanded(
+                      )
+                    : selectTapaPiston == SelectTapaPiston.piston
+                        ? Container(
+                            width: 300,
+                            decoration: BoxDecoration(border: Border.all()),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -314,65 +317,67 @@ class _MyHomePageState extends State<MyHomePage> {
                                 ),
                               ],
                             ),
-                          ),
-                        )
-                      : const SizedBox(height: 10),
-              const SizedBox(height: 12),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  ElevatedButton(
-                    style: style,
-                    onPressed: selectTapaPiston == SelectTapaPiston.none ||
-                            sistema == SelectSistema.none
-                        ? null
-                        : () {
-                            if (!datosValidos()) {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: const Text('Datos Erroneos'),
-                                    content: const Text(
-                                        'Todos los valores son obligatorios y deben ser positivos'),
-                                    actions: [
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Entendido'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            } else {
-                              calcularGAP(context);
-                            }
-                          },
-                    child: const Text('Calcular'),
-                  ),
-                  ElevatedButton(
-                    style: styleClean,
-                    onPressed: () {
-                      _d1min.clear();
-                      _D2max.clear();
-                      _D3max.clear();
-                      _D3min.clear();
-                      _D1max.clear();
-                      _d2min.clear();
-                      _d3max.clear();
-                      _d3min.clear();
-                      _Smax.clear();
-                      _di.clear();
-                      _Smin.clear();
-                    },
-                    child: const Text('Limpiar'),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 20)
-            ],
+                          )
+                        : const SizedBox(height: 10),
+                const SizedBox(height: 12),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    // BOTON CALCULAR
+                    ElevatedButton(
+                      style: style,
+                      onPressed: selectTapaPiston == SelectTapaPiston.none ||
+                              sistema == SelectSistema.none
+                          ? null
+                          : () {
+                              if (!datosValidos()) {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: const Text('Datos Erroneos'),
+                                      content: const Text(
+                                          'Todos los valores son obligatorios y deben ser positivos'),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('Entendido'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              } else {
+                                calcularGAP(context);
+                              }
+                            },
+                      child: const Text('Calcular'),
+                    ),
+                    //BOTON LIMPIAR
+                    ElevatedButton(
+                      style: styleClean,
+                      onPressed: () {
+                        _d1min.clear();
+                        _D2max.clear();
+                        _D3max.clear();
+                        _D3min.clear();
+                        _D1max.clear();
+                        _d2min.clear();
+                        _d3max.clear();
+                        _d3min.clear();
+                        _Smax.clear();
+                        _di.clear();
+                        _Smin.clear();
+                      },
+                      child: const Text('Limpiar'),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20)
+              ],
+            ),
           ),
         ),
       ),
@@ -414,10 +419,12 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void calcularGAP(BuildContext context) {
-    String titulo = '';
-    String mensajeSistema = '';
-
+    String titulo = ''; // EL TITULO DEL RESULTADO
+    String mensajeSistema = ''; // EL MENSAJE DEL RESULTADO
+    //EVALUA QUE ESTA CALCULANDO
+    //TAPA
     if (selectTapaPiston == SelectTapaPiston.tapa) {
+      //DARLE VALOR A LAS VARIABLES
       D2max = double.parse(_D2max.text);
       D3max = double.parse(_D3max.text);
       Smin = double.parse(_Smin.text);
@@ -425,9 +432,13 @@ class _MyHomePageState extends State<MyHomePage> {
       D3min = double.parse(_D3min.text);
 
       titulo = 'El calculo de la Tapa es:';
+      // FORMULAS Y CALCULOS DE LA TAPA
       GAPmax = ((D2max + D3max) / 2.0) - Smin - d1min;
       GAPmin = Smin - ((D2max - D3min) / 2.0);
+///////////////////////////////////////////////////////////////////////////////
+      //PISTON
     } else if (selectTapaPiston == SelectTapaPiston.piston) {
+      //DARLE VALOR A LAS VARIABLES
       D1max = double.parse(_D1max.text);
       d2min = double.parse(_d2min.text);
       d3max = double.parse(_d3max.text);
@@ -436,31 +447,38 @@ class _MyHomePageState extends State<MyHomePage> {
       di = double.parse(_di.text);
       Smin = double.parse(_Smin.text);
       titulo = 'El calculo de la Pistón';
+      // FORMULAS Y CALCULOS DE LA TAPA
       GAPmax = D1max - Smax - ((d3min + d2min) / 2.0) + di;
       GAPmin = Smin - ((d3max - d2min) / 2.0);
     }
-
+//EVALUANDO QUE SISTEMA ESCOGIO
+    //SISTEMA INTERNACIONAL
     if (sistema == SelectSistema.SI) {
       if (GAPmin < 0.1) {
-        mensajeSistema = 'El GAP mínimo no cumple el limite establecido';
+        mensajeSistema =
+            'El GAP máximo es: ${GAPmax.toStringAsFixed(3)} \nEl GAP mínimo no cumple el limite establecido';
       } else {
-        mensajeSistema = 'El GAP mínimo cumple el limite establecido';
-      }
-    } else if (sistema == SelectSistema.STI) {
-      if (GAPmin < 0.004) {
-        mensajeSistema = 'El GAP mínimo no cumple el limite establecido';
-      } else {
-        mensajeSistema = 'El GAP mínimo cumple el limite establecido';
+        mensajeSistema =
+            'El GAP máximo es: ${GAPmax.toStringAsFixed(3)} \nEl GAP mínimo es: ${GAPmin.toStringAsFixed(3)} \nEl GAP mínimo cumple el limite establecido';
       }
     }
-
+    //SISTEMA TECNICO INGLES
+    else if (sistema == SelectSistema.STI) {
+      if (GAPmin < 0.004) {
+        mensajeSistema =
+            'El GAP máximo es: ${GAPmax.toStringAsFixed(3)} \nEl GAP mínimo no cumple el limite establecido';
+      } else {
+        mensajeSistema =
+            'El GAP máximo es: ${GAPmax.toStringAsFixed(3)} \nEl GAP mínimo es: ${GAPmin.toStringAsFixed(3)} \nEl GAP mínimo cumple el limite establecido';
+      }
+    }
+    //MOSTRAR EL RESULTADO EN UNA VENTANITA
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(titulo),
-          content: SelectableText(
-              'El GAP máximo es: ${GAPmax.toStringAsFixed(6)} \nEl GAP mínimo es: ${GAPmin.toStringAsFixed(6)} \n$mensajeSistema'),
+          content: SelectableText(mensajeSistema),
           actions: [
             TextButton(
               onPressed: () {
